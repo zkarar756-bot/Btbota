@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>عالم بتبت 👑</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#f9c6d4;--rose:#e8799b;--deep:#b8456b;--gold:#d4a24c;--cream:#fff8f0;--ink:#6b2d44;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Tajawal',Tahoma,sans-serif;color:var(--ink);background:linear-gradient(160deg,#fff8f0,#fde4ec 50%,#fff3dc);background-attachment:fixed;overflow-x:hidden}
+h1,h2,h3{font-family:'Amiri',serif;margin:0}
+.gold{background:linear-gradient(90deg,#b8862f,#f3d58a,#b8862f);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:shine 4s linear infinite}
+@keyframes shine{to{background-position:200% 0}}
+#gate{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 30% 20%,#ffe3ec,#f7b6cb 60%,#e8799b);transition:opacity 1s,transform 1s}
+#gate.out{opacity:0;transform:scale(1.15);pointer-events:none}
+#gate h1{font-size:clamp(1.8rem,7vw,3.2rem);line-height:1.6;color:#fff;text-shadow:0 2px 12px rgba(184,69,107,.5);animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.btn{border:0;cursor:pointer;font:700 1rem 'Tajawal',sans-serif;padding:12px 22px;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--rose),var(--deep));box-shadow:0 6px 18px rgba(184,69,107,.35);transition:transform .2s}
+.btn:active{transform:scale(.94)}
+.btn.g{background:linear-gradient(135deg,#e6bd6a,#b8862f)}
+#enter{margin-top:30px;font-size:1.15rem;padding:16px 30px;background:linear-gradient(135deg,#f3d58a,#c9953a);color:#5b2a14;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{transform:scale(1.07);box-shadow:0 0 30px #f3d58a}}
+.fl{position:fixed;z-index:60;pointer-events:none;font-size:24px;animation:up 2.4s ease-out forwards}
+@keyframes up{to{transform:translateY(-100vh) rotate(40deg);opacity:0}}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+section{margin:34px 0;padding:22px 18px;border-radius:26px;background:rgba(255,255,255,.72);border:1.5px solid rgba(212,162,76,.45);box-shadow:0 10px 30px rgba(232,121,155,.18)}
+section>h2{text-align:center;font-size:1.8rem;margin-bottom:14px}
+.hero{text-align:center;padding:30px 0 6px}
+.hero h1{font-size:clamp(2.4rem,10vw,4rem)}
+.hero p{font-family:'Amiri',serif;font-size:1.3rem}
+.card{background:linear-gradient(135deg,#fff,#ffeaf1);border-radius:20px;padding:22px;text-align:center;font-family:'Amiri',serif;font-size:1.35rem;line-height:2;min-height:150px;display:flex;align-items:center;justify-content:center;border:1px solid var(--pink);transition:opacity .5s}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px;align-items:center}
+canvas{width:100%;border-radius:18px;background:#fffdf9;border:2px dashed var(--gold);touch-action:none;display:block}
+.dot{width:30px;height:30px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--gold);cursor:pointer}
+.score{text-align:center;font-weight:800;font-size:1.1rem;margin-bottom:8px}
+#wheel{width:200px;height:200px;margin:6px auto;border-radius:50%;border:6px solid var(--gold);background:conic-gradient(#f9c6d4 0 45deg,#fff3dc 0 90deg,#f4a6bf 0 135deg,#fff8f0 0 180deg,#f9c6d4 0 225deg,#fff3dc 0 270deg,#f4a6bf 0 315deg,#fff8f0 0 360deg);display:flex;align-items:center;justify-content:center;font-size:2.6rem;transition:transform 3.5s cubic-bezier(.1,.7,.1,1);position:relative}
+.pin{text-align:center;font-size:1.8rem;margin-bottom:-14px;position:relative;z-index:2}
+.opt{display:block;width:100%;margin:8px 0;text-align:right;background:#fff;color:var(--ink);border:1.5px solid var(--pink);box-shadow:none}
+.opt:hover{background:#ffeaf1}
+.gifts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gift{font-size:2.4rem;background:#fff;border:1.5px solid var(--gold);border-radius:18px;padding:14px 0;cursor:pointer;transition:transform .2s}
+.gift:active{transform:scale(.9) rotate(-6deg)}
+#modal{position:fixed;inset:0;z-index:70;background:rgba(107,45,68,.55);display:none;align-items:center;justify-content:center;padding:20px}
+#modal.on{display:flex}
+#modal div{background:var(--cream);border-radius:24px;padding:24px;max-width:420px;width:100%;text-align:center;font-family:'Amiri',serif;font-size:1.3rem;line-height:2;border:2px solid var(--gold);max-height:90vh;overflow:auto}
+#modal img{max-width:100%;border-radius:12px}
+footer{text-align:center;font-family:'Amiri',serif;font-size:1.2rem;padding-bottom:20px}
+.btn.sm{padding:8px 14px;font-size:.9rem}.btn.off{opacity:.5}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div style="font-size:3rem">👑</div>
+  <h1>أهلاً بيج بعالم بتبت المريضه ✨💖</h1>
+  <button class="btn" id="enter">اضغطي هنا لدخول عالم الملكة 👑</button>
+</div>
+
+<main>
+  <div class="hero">
+    <h1 class="gold">عالم بتبت</h1>
+    <p>مملكة الدلال والجمال ✨</p>
+  </div>
+
+  <section>
+    <h2 class="gold">ركن الكلمات لعيونها 💫</h2>
+    <div class="card" id="praise"></div>
+    <div class="row"><button class="btn" id="nextPraise">كلمة ثانية 💖</button></div>
+  </section>
+
+  <section>
+    <h2 class="gold">🎨 لوحة التلوين السحرية</h2>
+    <div class="row" id="tpls"></div>
+    <div class="row">
+      <button class="btn sm" id="mFill">🪣 تعبئة بالضغط</button>
+      <button class="btn sm off" id="mBrush">🖌️ تلوين بالإيد</button>
+      <input type="range" id="bsz" min="4" max="40" value="14" style="width:90px">
+    </div>
+    <div style="position:relative;margin-top:12px;border:2px dashed var(--gold);border-radius:18px;overflow:hidden;background:#fff">
+      <canvas id="paint" style="border:0;border-radius:0"></canvas>
+      <canvas id="lines" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border:0;background:transparent;border-radius:0"></canvas>
+    </div>
+    <div class="row" id="colors"></div>
+    <div class="row">
+      <button class="btn" id="clr">مسح التلوين 🧽</button>
+      <button class="btn g" id="sv">حفظ الرسمة 💾</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="gold">💗 اجمعي قلوب بتبت</h2>
+    <div class="score">النقاط: <span id="sc">0</span> &nbsp;|&nbsp; الوقت: <span id="tm">30</span></div>
+    <canvas id="catch" width="700" height="420"></canvas>
+    <div class="row"><button class="btn" id="startC">ابدئي اللعب ▶</button></div>
+    <p style="text-align:center;font-size:.9rem">حركي السلة بإصبعك أو بالأسهم ⬅️➡️</p>
+  </section>
+
+  <section>
+    <h2 class="gold">🎡 عجلة غزل عيون بتبت</h2>
+    <div class="pin">🔻</div>
+    <div id="wheel">💖</div>
+    <div class="row"><button class="btn" id="spin">لفّي العجلة 🌀</button></div>
+    <div class="card" id="wres" style="min-height:90px;margin-top:14px;font-size:1.2rem">اضغطي ولفّي لتطلع لك صفة حلوة فيج ✨</div>
+  </section>
+
+  <section>
+    <h2 class="gold">🧠 شقد تعرفين عن دلع بتبت؟</h2>
+    <div id="quiz"></div>
+  </section>
+
+  <section>
+    <h2 class="gold">🎁 صندوق المفاجآت</h2>
+    <div class="gifts" id="gifts"></div>
+  </section>
+
+  <footer class="gold">صُنع بكل حب لبتبت 👑💖</footer>
+</main>
+
+<div id="modal"><div id="mbox"></div></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const modal=$('#modal'),mbox=$('#mbox');
+modal.onclick=e=>{if(e.target===modal)modal.classList.remove('on')};
+function show(html){mbox.innerHTML=html+'<br><button class="btn" onclick="document.getElementById(\'modal\').classList.remove(\'on\')">تمام 💖</button>';modal.classList.add('on')}
+function burst(n=24){const E=['💖','💗','✨','🌸','⭐','💕','🎀'];for(let i=0;i<n;i++){const s=document.createElement('span');s.className='fl';s.textContent=E[i%E.length];s.style.left=Math.random()*100+'vw';s.style.top=(60+Math.random()*40)+'vh';s.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),3500)}}
+
+$('#enter').onclick=()=>{burst(40);$('#gate').classList.add('out');setTimeout(()=>$('#gate').style.display='none',1000)};
+
+/* Praise */
+const praise=[
+'عيونج مثل نجمتين تضوّي الدنيا، وكل ما ناظرتيني حسيت إن اليوم صار أحلى.',
+'في نظراتج دفا وطيبة، تخلي القلب يهدأ وكأن الدنيا كلها سلام.',
+'وجودج يزيّن المكان، وين ما كنتي يصير للحياة لون ثاني.',
+'طيبة قلبج أجمل من كل الجمال، وعيونج مرآتها.',
+'ضحكتج تنثر الفرح على اللي حواليج، وعيونج تكتب له الحكاية.',
+'ما أحلى الدنيا إذا مرّت من عيونج، كأن الورد كله اجتمع بنظرة وحدة.',
+'أنتي مو بس جميلة، أنتي نور يمشي على الأرض ويعلّم الناس يبتسمون.'
+];
+let pi=0;const pe=$('#praise');
+function showPraise(){pe.style.opacity=0;setTimeout(()=>{pe.textContent=praise[pi++%praise.length];pe.style.opacity=1},300)}
+$('#nextPraise').onclick=()=>{showPraise();burst(8)};showPraise();
+
+/* Paint / Coloring */
+const W=700,H=420,pc=$('#paint'),lc=$('#lines');
+pc.width=lc.width=W;pc.height=lc.height=H;
+const px=pc.getContext('2d',{willReadFrequently:true}),lx=lc.getContext('2d');
+let col='#e8799b',mode='fill',drawing=false,bar=new Uint8Array(W*H);
+px.lineCap='round';px.lineJoin='round';
+const COLS=['#e8799b','#f9a8c0','#ff5c8a','#d4a24c','#f3d58a','#ff9a3c','#b8456b','#8e6bbf','#6fb8e8','#4aa3a3','#7bc67b','#ffffff','#6b2d44'];
+COLS.forEach((c,i)=>{const d=document.createElement('div');d.className='dot';d.style.background=c;d.onclick=()=>{col=c;document.querySelectorAll('.dot').forEach(x=>x.style.transform='');d.style.transform='scale(1.3)'};if(!i)d.style.transform='scale(1.3)';$('#colors').appendChild(d)});
+const T={
+'قلب 💖':g=>{S(g,()=>{g.moveTo(350,385);g.bezierCurveTo(90,230,170,30,350,135);g.bezierCurveTo(530,30,610,230,350,385)})},
+'زهرة 🌸':g=>{S(g,()=>g.rect(341,215,18,200));S(g,()=>g.ellipse(290,330,50,22,-0.5,0,7));S(g,()=>g.ellipse(410,300,50,22,0.5,0,7));
+ for(let i=0;i<8;i++){const a=i*Math.PI/4;S(g,()=>g.ellipse(350+Math.cos(a)*80,150+Math.sin(a)*80,52,28,a,0,7))}
+ S(g,()=>g.arc(350,150,42,0,7))},
+'فراشة 🦋':g=>{g.beginPath();g.moveTo(345,115);g.quadraticCurveTo(320,50,285,40);g.moveTo(355,115);g.quadraticCurveTo(380,50,415,40);g.stroke();
+ S(g,()=>g.ellipse(245,150,115,75,-0.4,0,7));S(g,()=>g.ellipse(455,150,115,75,0.4,0,7));
+ S(g,()=>g.ellipse(270,280,80,55,0.5,0,7));S(g,()=>g.ellipse(430,280,80,55,-0.5,0,7));
+ S(g,()=>g.ellipse(350,215,16,105,0,0,7));S(g,()=>g.arc(245,150,22,0,7));S(g,()=>g.arc(455,150,22,0,7))},
+'تاج 👑':g=>{S(g,()=>{g.moveTo(140,340);g.lineTo(140,160);g.lineTo(245,245);g.lineTo(350,110);g.lineTo(455,245);g.lineTo(560,160);g.lineTo(560,340);g.closePath()});
+ S(g,()=>g.rect(140,300,420,60));[[140,145,20],[350,95,22],[560,145,20]].forEach(([x,y,r])=>S(g,()=>g.arc(x,y,r,0,7)));
+ [[245,270,17],[350,225,19],[455,270,17]].forEach(([x,y,r])=>S(g,()=>g.arc(x,y,r,0,7)))},
+'نجمة ⭐':g=>{S(g,()=>{for(let i=0;i<10;i++){const r=i%2?80:190,a=-Math.PI/2+i*Math.PI/5;g[i?'lineTo':'moveTo'](350+Math.cos(a)*r,230+Math.sin(a)*r)}g.closePath()})},
+'كب كيك 🧁':g=>{S(g,()=>{g.moveTo(215,250);g.lineTo(485,250);g.lineTo(445,395);g.lineTo(255,395);g.closePath()});
+ S(g,()=>g.ellipse(350,235,155,55,0,0,7));S(g,()=>g.ellipse(350,175,105,65,0,0,7));S(g,()=>g.arc(350,92,22,0,7))},
+'رسم حر ✏️':g=>{}
+};
+function S(g,f){g.beginPath();f();g.fillStyle='#fff';g.fill();g.stroke()}
+let tname='قلب 💖';
+function loadT(n){
+  tname=n;px.clearRect(0,0,W,H);px.fillStyle='#fff';px.fillRect(0,0,W,H);
+  const t=document.createElement('canvas');t.width=W;t.height=H;const g=t.getContext('2d');
+  g.fillStyle='#fff';g.fillRect(0,0,W,H);g.lineWidth=5;g.strokeStyle='#000';g.lineJoin='round';g.lineCap='round';
+  T[n](g);
+  const d=g.getImageData(0,0,W,H).data,o=lx.createImageData(W,H);
+  for(let i=0;i<W*H;i++){const v=d[i*4];bar[i]=v<200?1:0;o.data[i*4]=107;o.data[i*4+1]=45;o.data[i*4+2]=68;o.data[i*4+3]=255-v}
+  lx.putImageData(o,0,0);
+  document.querySelectorAll('#tpls .btn').forEach(b=>b.classList.toggle('off',b.dataset.n!==n));
+}
+Object.keys(T).forEach(n=>{const b=document.createElement('button');b.className='btn sm off';b.textContent=n;b.dataset.n=n;b.onclick=()=>loadT(n);$('#tpls').appendChild(b)});
+function setMode(m){mode=m;$('#mFill').classList.toggle('off',m!=='fill');$('#mBrush').classList.toggle('off',m!=='brush')}
+$('#mFill').onclick=()=>setMode('fill');$('#mBrush').onclick=()=>setMode('brush');
+function hex(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
+function flood(x,y){
+  if(bar[y*W+x])return;
+  const id=px.getImageData(0,0,W,H),d=id.data,si=(y*W+x)*4,tr=d[si],tg=d[si+1],tb=d[si+2],[fr,fg,fb]=hex(col);
+  if(Math.abs(tr-fr)+Math.abs(tg-fg)+Math.abs(tb-fb)<8)return;
+  const vis=new Uint8Array(W*H),st=[y*W+x];vis[y*W+x]=1;
+  while(st.length){const p=st.pop(),q=p*4;d[q]=fr;d[q+1]=fg;d[q+2]=fb;d[q+3]=255;const cx=p%W;
+    const nb=[cx>0?p-1:-1,cx<W-1?p+1:-1,p>=W?p-W:-1,p<W*H-W?p+W:-1];
+    for(const n of nb){if(n<0||vis[n]||bar[n])continue;vis[n]=1;const m=n*4;
+      if(Math.abs(d[m]-tr)+Math.abs(d[m+1]-tg)+Math.abs(d[m+2]-tb)<70)st.push(n)}}
+  px.putImageData(id,0,0);burst(3);
+}
+function pos(e){const r=pc.getBoundingClientRect();return[Math.round((e.clientX-r.left)*W/r.width),Math.round((e.clientY-r.top)*H/r.height)]}
+pc.addEventListener('pointerdown',e=>{const[x,y]=pos(e);
+  if(mode==='fill'){if(x>=0&&y>=0&&x<W&&y<H)flood(x,y);return}
+  drawing=true;pc.setPointerCapture(e.pointerId);px.strokeStyle=col;px.lineWidth=+$('#bsz').value;px.beginPath();px.moveTo(x,y);px.lineTo(x+.1,y+.1);px.stroke()});
+pc.addEventListener('pointermove',e=>{if(!drawing)return;const[x,y]=pos(e);px.lineTo(x,y);px.stroke()});
+['pointerup','pointercancel'].forEach(v=>pc.addEventListener(v,()=>drawing=false));
+$('#clr').onclick=()=>loadT(tname);
+$('#sv').onclick=()=>{const t=document.createElement('canvas');t.width=W;t.height=H;const c=t.getContext('2d');c.drawImage(pc,0,0);c.drawImage(lc,0,0);show('رسمتج الحلوة 🎨<br><img src="'+t.toDataURL('image/png')+'"><br><small>اضغطي على الصورة مطولاً لحفظها</small>')};
+loadT(tname);
+
+/* Catch game */
+const cc=$('#catch'),cx=cc.getContext('2d');let bx=300,items=[],score=0,left=30,run=false,raf,t1,t2;
+function moveBasket(e){const r=cc.getBoundingClientRect();bx=(e.clientX-r.left)*cc.width/r.width}
+cc.addEventListener('pointermove',moveBasket);cc.addEventListener('pointerdown',moveBasket);
+addEventListener('keydown',e=>{if(e.key==='ArrowLeft')bx-=30;if(e.key==='ArrowRight')bx+=30});
+function idle(){cx.clearRect(0,0,700,420);cx.font='40px serif';cx.textAlign='center';cx.fillText('👑 اضغطي ابدئي',350,210)}idle();
+function loop(){
+  cx.clearRect(0,0,700,420);
+  if(Math.random()<.05)items.push({x:30+Math.random()*640,y:-20,e:['💖','⭐','💗','🌸','💣'][Math.random()*5|0],v:2+Math.random()*3});
+  cx.font='34px serif';cx.textAlign='center';
+  items.forEach(o=>{o.y+=o.v;cx.fillText(o.e,o.x,o.y)});
+  items=items.filter(o=>{if(o.y>380&&Math.abs(o.x-bx)<50){if(o.e==='💣'){score=Math.max(0,score-3);}else score+= o.e==='⭐'?2:1;$('#sc').textContent=score;if(o.e!=='💣')burst(2);return false}return o.y<440});
+  bx=Math.max(40,Math.min(660,bx));cx.font='50px serif';cx.fillText('🧺',bx,410);
+  if(run)raf=requestAnimationFrame(loop);
+}
+$('#startC').onclick=()=>{clearInterval(t1);cancelAnimationFrame(raf);score=0;left=30;items=[];run=true;$('#sc').textContent=0;$('#tm').textContent=30;loop();
+  t1=setInterval(()=>{left--;$('#tm').textContent=left;if(left<=0){clearInterval(t1);run=false;cancelAnimationFrame(raf);idle();burst(40);show('انتهى الوقت! 🎉<br>جمعتي <b>'+score+'</b> نقطة<br>'+(score>25?'ملكة القلوب بدون منازع 👑':score>12?'شاطرة واجد! 💖':'مرة ثانية وتكسرين الرقم! 💪'))}},1000)};
+
+/* Wheel */
+const traits=['عيونج فيها سحر يخلي الكل يسكت ويتأمل ✨','قلبج أطيب من الشهد 🍯','ضحكتج تضوّي المكان 🌟','دلعج يذوّب القلوب 💖','حضورج يشبه الورد، ما يجي إلا بالخير 🌸','أنتي أجمل صدفة بالحياة 💫','نظرة منج تكفي تصلّح اليوم كله 👁️💕','أنتي ملكة بكل معنى الكلمة 👑'];
+let rot=0;$('#spin').onclick=()=>{rot+=1440+Math.random()*360|0;$('#wheel').style.transform='rotate('+rot+'deg)';$('#wres').textContent='...';setTimeout(()=>{$('#wres').textContent=traits[Math.random()*traits.length|0];burst(14)},3600)};
+
+/* Quiz */
+const Q=[
+['أحلى شي عند بتبت؟',['عيونها','دلعها','كل شي فيها 😍'],[1,1,2]],
+['إذا زعلت بتبت، الحل؟',['شوكولاتة 🍫','اعتذار وياه ورد 🌹','أتركها وأهرب 🏃'],[2,2,0]],
+['بتبت وقت النوم تكون؟',['ملكة نايمة 👑','تقول "خمس دقايق بس"','تسهر وتتحجى'],[1,2,1]],
+['لو بتبت صارت ملكة، أول قرار؟',['تمنع الزعل','تعمل عيد وطني للدلع','تخلّي الكل يدلعها'],[1,2,2]],
+['أفضل هدية لبتبت؟',['كلمة حلوة من القلب','ورد وشوكلت','كلهم مع بعض!'],[2,1,2]]
+];
+let qi=0,qs=0;
+function renderQ(){const q=$('#quiz');if(qi>=Q.length){const r=qs>=8?['خبيرة دلع معتمدة 👑','تعرفين نفسج أحسن من الكل!']:qs>=5?['ملكة تحت التدريب 🎀','قريبة من اللقب، كمّلي!']:['بتبت الغامضة 🔮','حتى أنتي ما تعرفين نفسج، وهذا يزيدج سحر!'];q.innerHTML='<div class="card"><div><b>'+r[0]+'</b><br>'+r[1]+'</div></div><div class="row"><button class="btn" id="rq">من جديد 🔄</button></div>';burst(30);$('#rq').onclick=()=>{qi=0;qs=0;renderQ()};return}
+  const[t,o,s]=Q[qi];q.innerHTML='<p style="font-weight:800">'+(qi+1)+'/'+Q.length+' — '+t+'</p>'+o.map((x,i)=>'<button class="btn opt" data-s="'+s[i]+'">'+x+'</button>').join('');
+  q.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{qs+=+b.dataset.s;qi++;burst(5);renderQ()})}
+renderQ();
+
+/* Gifts */
+const msgs=['أنتي مو لحالج أبداً، أنا جنبج دايماً 🤗','شاطرة وقوية، وأنا فخور بكل خطوة منج 💪','اليوم صعب؟ خذي نفس عميق، وبكرة أحلى بإذن الله 🌤️','تستاهلين كل خير وفرح بالدنيا 💖','ابتسامتج تساوي الدنيا، لا تخلينها تغيب 🌷','أي وقت تحتاجين أحد، أنا موجود 🫶'];
+msgs.forEach((m,i)=>{const b=document.createElement('div');b.className='gift';b.style.textAlign='center';b.textContent=['🎁','💌','🧸','🌹','🎀','⭐'][i];b.onclick=()=>{burst(16);show(m)};$('#gifts').appendChild(b)});
+</script>
+</body>
+</html>
